@@ -1,0 +1,55 @@
+// interface d'exectuion des requetes
+
+const sql= require('sqlite3').verbose()
+const db = new sql.Database('./mydatabase.db', (err) => {
+    if (err) {
+        console.error(err.message);
+    }
+    else{
+      db.run('PRAGMA foreign_keys=ON;');
+      // console.log('Connected to the database.');
+    }
+    
+});
+
+//Activaion du concept des cles etrangers
+
+
+function runQuery(query, params = [], options = {}) {//utiliser pour des requettes simple 
+    return new Promise((resolve, reject) => {
+      const method = options.method || 'run'; // Méthode par défaut : run
+  
+      db[method](query, params, (err, result) => {
+        if (err) {
+          reject({ error: err, query, params }); // Retourner plus d'informations sur l'erreur
+        } else {
+          resolve({
+            result
+          });
+        }
+      });
+    });
+  }
+  
+
+  function runPrepare(query, params = [], options = {}) {//pour des requete preparer sauf le select 
+    return new Promise((resolve, reject) => {
+      try {
+        const stmt = db.prepare(query, options);
+  
+        params.forEach(element => {
+          console.log(element)
+          stmt.run(element);
+          
+        });
+  
+      stmt.finalize();
+        resolve('query ok'); // Retourner des informations supplémentaires
+      } catch (error) {
+        reject(error);
+      } 
+    });
+  }
+
+
+module.exports={ db,runQuery,runPrepare}
