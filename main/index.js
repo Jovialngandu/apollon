@@ -8,9 +8,9 @@ let mainWin;
 app.whenReady().then(async() => { 
 
   initDatas()
-  mainWin= await createWindow()  //recuperation de la fenetre principale
-  setupIpcEmitters(mainWin) //configuration des emetteurs
-  setupIpcListeners(mainWin)  //configuration des ecouteurs
+  // mainWin= await createWindow()  //recuperation de la fenetre principale
+  // setupIpcEmitters(mainWin) //configuration des emetteurs
+  // setupIpcListeners(mainWin)  //configuration des ecouteurs
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
