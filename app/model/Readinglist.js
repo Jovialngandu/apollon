@@ -10,4 +10,4 @@ class Readinglist extends Model {
     }
   }
   
-  module.exports = new Playlist();
+  module.exports = new Readinglist();
