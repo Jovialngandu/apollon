@@ -14,7 +14,8 @@ class Music extends Model {
         year:'INTEGER',
         genre:'JSON',
         read_at:'DATETIME',
-        is_favorite:'BOOL'
+        is_favorite:'BOOL',
+        is_reading:'BOOL',
 
       });
     }
