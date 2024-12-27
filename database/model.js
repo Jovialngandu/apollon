@@ -10,11 +10,13 @@ class Model {
     }
     
     async createTable() {
+       
         const columns = Object.entries(this.schema)//transforme l'objet en tableau avec chaque entré comme tableau de 2 element (le nom de l'attribut et ses contraintes)
           .map(([name, type]) => `${name} ${type}`)//ceci va retourner un tableau qui va concatener le nom de l'attribut et ses contrainte ou type
           .join(', ');
     
         const query = `CREATE TABLE IF NOT EXISTS ${this.tableName} (${columns} ${this.constraint})`;
+        
         await runQuery(query);
         console.log(`Table "${this.tableName}" CREATE.`);
     }
@@ -113,6 +115,13 @@ class Model {
         const result=await runPrepare(query,Array(values));        
         return result;
 
+    }
+
+    async ModelExists() {
+        const query = `SELECT name FROM sqlite_master WHERE type='table' AND name=?`;
+        const rows = await runQuery(query,[this.tableName],{method:'get'});
+
+        return  (rows.result)?true:false;
     }
 
 }
