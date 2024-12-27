@@ -6,7 +6,7 @@ class Music extends Model {
         id: 'INTEGER PRIMARY KEY AUTOINCREMENT',
         file_name: 'VARCHAR NOT NULL',
         file_path:'TEXT NOT NULL',
-        duration:'DOUBLE"',
+        duration:'DOUBLE',
         artist_name:'JSON',
         album_name: 'TEXT ',
         title:'TEXT',

@@ -3,7 +3,8 @@ Model=require('../../database/model')
 class Setting extends Model {
     constructor() {
       super('setting', {
-        values: 'JSON',
+        id: 'INTEGER PRIMARY KEY AUTOINCREMENT',
+        datas: 'JSON',
               
       });
     }
