@@ -2,7 +2,7 @@ const { app } = require('electron/main')
 const createWindow = require('./windows')
 const setupIpcListeners = require('./ipcListeners')
 const setupIpcEmitters = require('./ipcEmitters')
-const initDatas=require('./Utils').initDatas
+const initDatas=require('./utils/Utils').initDatas
 let mainWin;
 
 app.whenReady().then(async() => { 
