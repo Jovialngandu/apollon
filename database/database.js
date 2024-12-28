@@ -1,7 +1,8 @@
 // interface d'exectuion des requetes
 
 const sql= require('sqlite3').verbose()
-const db = new sql.Database('./mydatabase.db', (err) => {
+const dbName='mydatabase.db'
+const db = new sql.Database(dbName, (err) => {
     if (err) {
         console.error(err.message);
     }
@@ -38,7 +39,7 @@ function runQuery(query, params = [], options = {}) {//utiliser pour des requett
         const stmt = db.prepare(query, options);
   
         params.forEach(element => {
-          console.log(element)
+        
           stmt.run(element);
           
         });
@@ -52,4 +53,4 @@ function runQuery(query, params = [], options = {}) {//utiliser pour des requett
   }
 
 
-module.exports={ db,runQuery,runPrepare}
+module.exports={ db,dbName,runQuery,runPrepare}
