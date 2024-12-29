@@ -1,6 +1,7 @@
 //fonctionalité utilitaire
 const { constants } = require('buffer')
 const {getConfig}=require('../utils/configUtils')
+const musicModel=require('../../app/model/Music')
 const {extractMetadata,getMusicPath,formatData}=require('../utils/musicUtils')
 const {stat}=require('fs/promises')
 async function initDatas() {
@@ -23,7 +24,7 @@ async function initDatas() {
  async function addMusic(path){
 
    stat(path, async (err)=>{
-      music=await require('../../app/model/Music').findWhere(path,'file_path')
+      music=await musicModel.findWhere(path,'file_path')
      
       if (!err && music.length==0) {
    
@@ -37,7 +38,13 @@ async function initDatas() {
 
       }
    
-     });
+   });
   
  }
-module.exports={initDatas,addMusic}
+
+async function removeMusic(path) {
+   
+   music=await musicModel.findWhere(path,'file_path')
+   await musicModel.deleteById(music[0].id)
+}
+module.exports={initDatas,addMusic,removeMusic}
