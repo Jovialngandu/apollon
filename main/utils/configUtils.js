@@ -5,25 +5,26 @@ const db  = require('../../database/database');
 const setting=require('../../app/model/Setting');
 
 async function getConfig()  {
+  
     if (existsSync(join(__dirname,'../../',db.dbName))){
-              
+
           if(await setting.ModelExists()){
-             setConfig({firstRun:0,a:12})
-             
-             return await setting.findLast();
-           
-            
+
+             await setConfig({firstRun:0,Path:["C:\\Users\\DELL\\Documents\\GitHub","C:\\Users\\DELL\\Documents\\css"]})
+      
           }else{
              await createConfig()
-             return  {
-                      id: 1,
-                      datas: '{"mode":0,"defaultPath":"C:\\\\Users\\\\DELL/music","firstRun":1}'
-                      }
-             // return await setting.findLast();
-             
           }
+
+          do {
+             settings =await setting.findLast();
+             settings =await setting.findLast();
+             
+          } while ((typeof settings) =='undefined');
+                 
+          return settings;   
     }
-       
+    
   }
  
   async function setConfig(...args) {
@@ -33,28 +34,32 @@ async function getConfig()  {
         json=JSON.parse(dataConfig.datas)// lastKeys=Object.keys(json)   
         newKeys=Object.keys(args[0])
         newKeys.map(key=>{
-          json[key]=args[0][key]
+          if(typeof json[key]=='object'){
+              json[key]=[...new Set([...json[key],... args[0][key]])]//sup doublons
+              
+          }else{
+            json[key]=args[0][key]
+          }
         })
-        
         newDatas=json
         await setting.UpdateById({datas:JSON.stringify(newDatas)},dataConfig.id)
     }else{
         newDatas=args[0]
         await setting.insert({datas:JSON.stringify(newDatas)})
     }
- 
+    
    }
  
   async function createConfig() {
  
     await setting.createTable() 
-    setting.insert({datas:JSON.stringify({
+
+    await setting.insert({datas:JSON.stringify({
        mode:0,//0=systeme,1=claire,2=sombre
-       defaultPath:process.env.Home+'/music',
+       Path:[process.env.Home+'/music'],
        firstRun:1,
     })})
    
-  
   }
 
   module.exports={createConfig,getConfig,setConfig}

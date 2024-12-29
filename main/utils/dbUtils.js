@@ -14,19 +14,24 @@ async function initTables() {
 async function refreshMusics(...args) {
     args.forEach(mzik=>{
         let {filename,filePath, Duration,artistNames,albumName,musicTitle,picture,year,genre}= mzik;
-        music.insert({
-        file_name:filename,
-        file_path:filePath,
-        duration:Duration,
-        artist_name:JSON.stringify(artistNames),
-        album_name: albumName,
-        title:musicTitle,
-        have_picture:(picture) ? 1:0,
-        year:year,
-        genre:JSON.stringify(genre),
-        is_favorite:0,
-        is_reading:0,
-        })
+       try {
+            music.insert({
+            file_name:filename,
+            file_path:filePath,
+            duration:Duration,
+            artist_name:JSON.stringify(artistNames),
+            album_name: albumName,
+            title:musicTitle,
+            have_picture:(picture) ? 1:0,
+            year:year,
+            genre:JSON.stringify(genre),
+            is_favorite:0,
+            is_reading:0,
+            })
+       } catch (error) {
+            console.log(error)
+       }
+       
     })
   
 }

@@ -5,7 +5,7 @@ class Music extends Model {
       super('music', {
         id: 'INTEGER PRIMARY KEY AUTOINCREMENT',
         file_name: 'VARCHAR NOT NULL',
-        file_path:'TEXT NOT NULL',
+        file_path:'TEXT NOT NULL UNIQUE',
         duration:'DOUBLE',
         artist_name:'JSON',
         album_name: 'TEXT ',

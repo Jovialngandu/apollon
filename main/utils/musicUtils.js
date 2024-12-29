@@ -72,12 +72,12 @@ async function extractMetadata(filePath) {
  }
 
 
- async function watchDir() {
+ async function watchDir(path=[process.env.Home+'/music']) {
 
    const extensions=['.mp3','.mp4']
    extensions.map(extensions=>{
 
-          watcher = chokidar.watch(process.env.Home+'/music', {
+          watcher = chokidar.watch(path, {
             ignored: (path, stats) => stats?.isFile() && (!path.endsWith(extensions)), 
             persistent: true,
             ignoreInitial: false,
