@@ -1,8 +1,8 @@
 const { app } = require('electron/main')
 const createWindow = require('./windows')
 const setupIpcListeners = require('./ipcListeners')
-const setupIpcEmitters = require('./ipcEmitters')
-const initDatas=require('./utils/Utils').initDatas
+const {setupIpcEmitters,myEmitter }= require('./ipcEmitters')
+const { addMusic,initDatas } = require('./utils/Utils')
 let mainWin;
 
 app.whenReady().then(async() => { 
@@ -11,7 +11,9 @@ app.whenReady().then(async() => {
   // mainWin= await createWindow()  //recuperation de la fenetre principale
   // setupIpcEmitters(mainWin) //configuration des emetteurs
   // setupIpcListeners(mainWin)  //configuration des ecouteurs
-
+  myEmitter.on('addMusic',(...args)=>addMusic(...args))
+  myEmitter.on('removeMusic',(...args)=>console.log(...args))
+  myEmitter.on('updateMusic',(...args)=>console.log(...args))
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()     

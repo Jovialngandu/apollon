@@ -1,7 +1,8 @@
 
 const mm = require('music-metadata');
 const {readdir} = require('fs/promises');
-
+const chokidar=require('chokidar');
+const Emitter=require('../ipcEmitters').myEmitter
 async function getMusicPath(directory=process.env.Home+'/music',isrecursive=true) {
 
    const params= {
@@ -71,6 +72,25 @@ async function extractMetadata(filePath) {
  }
 
 
- module.exports={extractMetadata,formatData,getMusicPath}
+ async function watchDir() {
+
+   const extensions=['.mp3','.mp4']
+   extensions.map(extensions=>{
+
+          watcher = chokidar.watch(process.env.Home+'/music', {
+            ignored: (path, stats) => stats?.isFile() && (!path.endsWith(extensions)), 
+            persistent: true,
+            ignoreInitial: false,
+      });
+      watcher 
+         . on ( 'add' , path =>  Emitter.emit('addMusic',path)) 
+         . on ( 'change' ,  path  =>  Emitter.emit('updateMusic',path)) 
+         . on ( 'unlink' ,  path  =>  Emitter.emit('removeMusic',path)) 
+      
+   })
+ }
+
+
+ module.exports={extractMetadata,formatData,getMusicPath, watchDir}
 
 

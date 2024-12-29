@@ -1,4 +1,6 @@
-//gestion des emmissions ipc
+//gestion des emmissions ipc et autres
+const { EventEmitter } =require ('node:events');
+const myEmitter = new EventEmitter();
 function setupIpcEmitters(mainWin) {
     // Exemple : Envoyer un événement lorsqu'une action spécifique est effectuée
     mainWin.webContents.once('did-finish-load', () => {
@@ -8,5 +10,5 @@ function setupIpcEmitters(mainWin) {
     console.log('ipcEmitters done.');
   }
   
-  module.exports = setupIpcEmitters;
+  module.exports = { setupIpcEmitters,myEmitter};
   

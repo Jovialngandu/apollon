@@ -48,11 +48,12 @@ async function getConfig()  {
   async function createConfig() {
  
     await setting.createTable() 
-    await setting.insert({datas:JSON.stringify({
+    setting.insert({datas:JSON.stringify({
        mode:0,//0=systeme,1=claire,2=sombre
        defaultPath:process.env.Home+'/music',
        firstRun:1,
     })})
+   
   
   }
 
