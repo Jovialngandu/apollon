@@ -17,10 +17,10 @@ async function getMusicPath(directory=process.env.Home+'/music',isrecursive=true
    compatibleFiles=(await musics.filter(file=>file.isFile()&& 
                    (file.name.includes('.mp3',file.name.length-4)|| 
                    (file.name.includes('.mp4',file.name.length-4))  )))
-                   .map(file=>[file.parentPath+'/'+file.name,file.name] )
+                   .map(file=>[file.parentPath+'\\'+file.name,file.name] )
                    ;
    
-
+   
    return compatibleFiles
    
 }
@@ -28,7 +28,6 @@ async function getMusicPath(directory=process.env.Home+'/music',isrecursive=true
 
 async function extractMetadata(filePath) {
  
-   
    try {
      
      const metadata = await mm.loadMusicMetadata();
@@ -40,6 +39,7 @@ async function extractMetadata(filePath) {
    } catch (err) {
      console.error(err);
    }
+
  }
 
  async function formatData(musics,metadatas){

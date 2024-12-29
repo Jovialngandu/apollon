@@ -21,6 +21,23 @@ async function initDatas() {
  }
 
  async function addMusic(path){
-  console.log( path,'add')
+
+   stat(path, async (err)=>{
+      music=await require('../../app/model/Music').findWhere(path,'file_path')
+     
+      if (!err && music.length==0) {
+   
+         try {
+            metadatas=await extractMetadata([[path]])//on recupere les metadatas
+            dataFormat= await formatData([[path,path.split('\\').pop()]],metadatas)
+            await require('../utils/dbUtils').refreshMusics(...dataFormat)
+         } catch (error) {
+            console.error(error)
+         }
+
+      }
+   
+     });
+  
  }
 module.exports={initDatas,addMusic}
