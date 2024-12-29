@@ -13,7 +13,7 @@ app.whenReady().then(async() => {
   // setupIpcListeners(mainWin)  //configuration des ecouteurs
   myEmitter.on('addMusic',(...args)=>addMusic(...args))
   myEmitter.on('removeMusic',(...args)=>removeMusic(...args))
-  myEmitter.on('updateMusic',(...args)=>updateMusic(...args))
+  // myEmitter.on('updateMusic',(...args)=>updateMusic(...args))
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow()     

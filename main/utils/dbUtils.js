@@ -12,6 +12,7 @@ async function initTables() {
 }
 
 async function refreshMusics(...args) {
+  
     args.forEach(mzik=>{
         let {filename,filePath, Duration,artistNames,albumName,musicTitle,picture,year,genre}= mzik;
        try {
@@ -36,4 +37,5 @@ async function refreshMusics(...args) {
   
 }
 
-module.exports={initTables,refreshMusics}
+
+module.exports={initTables,refreshMusics,}

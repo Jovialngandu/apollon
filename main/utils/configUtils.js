@@ -10,7 +10,7 @@ async function getConfig()  {
 
           if(await setting.ModelExists()){
 
-             await setConfig({firstRun:0,Path:["C:\\Users\\DELL\\Documents\\GitHub","C:\\Users\\DELL\\Documents\\css"]})
+             await setConfig({firstRun:0,Path:["C:\\Users\\DELL\\Documents\\GitHub","C:\\Users\\DELL\\Documents\\css"]})//Path:["C:\\Users\\DELL\\Documents\\GitHub","C:\\Users\\DELL\\Documents\\css"]
       
           }else{
              await createConfig()

@@ -15,14 +15,16 @@ async function initDatas() {
       await require('../utils/dbUtils').initTables()
       await require('../utils/dbUtils').refreshMusics(...dataFormat)
       await require('../utils/musicUtils').watchDir(JSON.parse(configs.datas).path)
-   }else{
-      await require('../utils/musicUtils').watchDir(JSON.parse(configs.datas).Path)
 
+   }else{
+  
+      refreshOffline()
+      await require('../utils/musicUtils').watchDir(JSON.parse(configs.datas).Path)
    }
  }
 
  async function addMusic(path){
-
+   
    stat(path, async (err)=>{
       music=await musicModel.findWhere(path,'file_path')
      
@@ -46,5 +48,22 @@ async function removeMusic(path) {
    
    music=await musicModel.findWhere(path,'file_path')
    await musicModel.deleteById(music[0].id)
+}
+
+
+async function refreshOffline() {
+
+   musics=await musicModel.findAll()
+   musics.result.forEach(music => {
+      stat(music.file_path, function(err) {
+         if (err) {
+            console.log('file or directory doesnot exists');
+            removeMusic(music.file_path)
+         }
+        
+        });
+   });
+   
+   
 }
 module.exports={initDatas,addMusic,removeMusic}
