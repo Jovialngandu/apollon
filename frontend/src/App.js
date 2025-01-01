@@ -2,7 +2,10 @@ import React from 'react';
 import Sidebar from './components/sidebar';
 import Header from './components/header';
 import Frame from './components/frame';
-
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Albums from './components/myMusicPages/albums' 
+import Artists from './components/myMusicPages/artists';
+import Singles from './components/myMusicPages/singles';
 function App() {
   return (
 
@@ -14,7 +17,16 @@ function App() {
       {/* <!-- Deuxième élément --> */}
       <div  style={{width:"96%"}}>
        <Frame/>
-       <Header/>
+       <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Header/>}>
+              <Route index element={<Singles />} />
+              <Route path="Singles" element={<Singles />} />
+              <Route path="Artists" element={<Artists/>} />
+              <Route path="Albums" element={<Albums />} />
+            </Route>
+          </Routes>
+    </BrowserRouter>
       </div>
     </div>
   
