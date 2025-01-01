@@ -8,9 +8,9 @@ let mainWin;
 app.whenReady().then(async() => { 
 
   initDatas()
-  // mainWin= await createWindow()  //recuperation de la fenetre principale
-  // setupIpcEmitters(mainWin) //configuration des emetteurs
-  // setupIpcListeners(mainWin)  //configuration des ecouteurs
+  mainWin= await createWindow()  //recuperation de la fenetre principale
+  setupIpcEmitters(mainWin) //configuration des emetteurs
+  setupIpcListeners(mainWin)  //configuration des ecouteurs
   myEmitter.on('addMusic',(...args)=>addMusic(...args))
   myEmitter.on('removeMusic',(...args)=>removeMusic(...args))
   // myEmitter.on('updateMusic',(...args)=>updateMusic(...args))

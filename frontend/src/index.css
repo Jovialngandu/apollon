@@ -11,3 +11,54 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+.dropdown {
+  display: none;
+}
+
+.dropdown-trigger:hover .dropdown {
+  display: block;
+}
+
+.spaceable{
+  letter-spacing: 0px;
+}
+
+/* @media screen and (max-width: 880px) {
+
+    .label_btn_side {
+        display: none;
+    }
+    .to_hidde{
+      display: none;
+    }
+    .to_see{
+      display: block;
+    }
+  
+}
+@media screen and (min-width: 880px) {
+
+  .to_see{
+    display: none;
+  }
+
+} */
