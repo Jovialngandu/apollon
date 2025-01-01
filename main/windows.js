@@ -15,7 +15,9 @@ function createWindow(){
         preload: path.join(__dirname, '../preload/index.js')
       },
      
-      // frame:false  
+      frame:false ,
+      minWidth:800,
+      resizable:false,
     })
   
     win.loadURL('http://localhost:3000');
@@ -25,6 +27,14 @@ function createWindow(){
      return win
   }
 
-module.exports = createWindow
+function close(win){
+    win.close()
+}
+
+function maximize(win){
+    (win.fullScreen)?win.setSize(1000,1000):win.maximize()
+}
+
+module.exports = {createWindow}
 
 

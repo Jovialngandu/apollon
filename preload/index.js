@@ -11,8 +11,6 @@ contextBridge.exposeInMainWorld('versions', {
 
 );
 
-
-
 contextBridge.exposeInMainWorld('api',{
   invoke:(channel,args)=>ipcRenderer.invoke(channel,args),
   send:(channel,args)=>ipcRenderer.send(channel,args),

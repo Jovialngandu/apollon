@@ -1,6 +1,7 @@
 import React from 'react';
 import Sidebar from './components/sidebar';
 import Header from './components/header';
+import Frame from './components/frame';
 
 function App() {
   return (
@@ -9,12 +10,10 @@ function App() {
     {/* <!-- Section principale en haut  */}
     <div className="flex flex-1 "style={{overflow:"hidden"}}>
       {/* <!-- Premier élément --> */}
-       
-      <Sidebar  className="bg-gray-200 "/>
-      
-  
+      <Sidebar  className="bg-gray-200 "/>  
       {/* <!-- Deuxième élément --> */}
       <div  style={{width:"96%"}}>
+       <Frame/>
        <Header/>
       </div>
     </div>

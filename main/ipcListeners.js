@@ -32,6 +32,10 @@ async function setupIpcListeners(mainWin) {//on pourait avoir besoin d'effectuer
     
   });
 
+  ipcMain.handle('closeWindow',()=>mainWin.close());
+
+   ipcMain.handle('minWindow',()=>mainWin.minimize())
+
   console.log('IpcListener Done.');
  
 }
