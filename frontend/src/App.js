@@ -16,7 +16,7 @@ function App() {
       {/* <!-- Premier élément --> */}
       <Sidebar  className="bg-gray-200 "/>  
       {/* <!-- Deuxième élément --> */}
-      <div  style={{width:"96%"}}>
+      <div  style={{width:"96%"}} className=''>
        <Frame/>
        <BrowserRouter>
           <Routes>
@@ -27,12 +27,13 @@ function App() {
               <Route path="Albums" element={<Albums />} />
             </Route>
           </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+      
       </div>
     </div>
   
     {/* <!-- Barre fixe en bas --> */}
-    <div className="h-40 bg-gray-800 text-white py-3 px-6 border">
+    <div className="h-40 bg-gray-800 text-white py-3 px-6 border ">
       <Player/>
     </div>
   </div>
