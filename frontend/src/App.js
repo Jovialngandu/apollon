@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Albums from './components/myMusicPages/albums' 
 import Artists from './components/myMusicPages/artists';
 import Singles from './components/myMusicPages/singles';
+import Player from './components/player';
 function App() {
   return (
 
@@ -31,8 +32,8 @@ function App() {
     </div>
   
     {/* <!-- Barre fixe en bas --> */}
-    <div className="h-24 bg-gray-800 text-white py-3 px-6">
-      <h3 className="text-center">Élément 3 (Fixe en bas)</h3>
+    <div className="h-40 bg-gray-800 text-white py-3 px-6 border">
+      <Player/>
     </div>
   </div>
   );

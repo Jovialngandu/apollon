@@ -12,7 +12,7 @@ const Header=(props)=>{
       
 
     }, [location]);
-    console.log(location)
+   
     return(
         <>
             <header className="p-2 text-gray-800">
