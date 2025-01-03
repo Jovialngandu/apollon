@@ -8,7 +8,7 @@ const Filter =(props)=>{
     return(
         <>
         
-            <div className="flex  bg-gray-200 w-full ">
+            <div className="flex  bg-gray-200 w-full p-2">
                 <div className="w-1/3 ">
                 <button className="flex p-2 text-sm ">
                     <svg className="w-5 h-5 text-gray-400 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

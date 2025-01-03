@@ -1,6 +1,7 @@
 import React from "react";
 import Filter from "../filter";
 import Openadder from "../openadder";
+import TableMusic from "../tableMusic";
 
 const Singles=()=>{
 
@@ -25,6 +26,14 @@ const Singles=()=>{
             />
 
              <Openadder/>
+             <div className="h-screen">
+                <div className="h-full">
+                        <TableMusic/>
+                </div>
+             
+                
+             </div>
+             
     </>
     )
 }
