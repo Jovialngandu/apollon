@@ -8,7 +8,7 @@ const Player=()=>{
 
         <div className="fixed bottom-0 left-0 z-50 grid w-full h-24 grid-cols-1 px-8 bg-gray-800 border-t border-gray-200 md:grid-cols-3 dark:bg-gray-700 dark:border-gray-600">
     <div className="items-center justify-center hidden me-auto md:flex">
-        <img className="h-8 me-3 rounded" src="https://unsplash.com/fr/photos/une-vue-du-ciel-nocturne-au-dessus-dun-plan-deau-m9FIXWpx6bI" alt="Video preview"/>
+        <img className="h-8 me-3 rounded"  alt="Video preview"/>
         <span className="text-sm text-gray-500 dark:text-gray-400">Flowbite Crash Course</span>
     </div>
     <div className="flex items-center w-full">

@@ -1,11 +1,14 @@
 import React from "react";
 import Filter from "../filter";
+import Openadder from "../openadder";
 
 const Singles=()=>{
 
     return(
         <>
-           <Filter context={
+        
+           <Filter 
+           context={
                 {
                     name:'singles',
                     number:12,
@@ -18,8 +21,11 @@ const Singles=()=>{
                     genders:['pop','rock','jazz']
 
                 }
-            }/>
-        </>
+            }
+            />
+
+             <Openadder/>
+    </>
     )
 }
 

@@ -6,13 +6,22 @@ import '../public/assets/css/fontawesome.min.css'
 import App from './App';
 // import reportWebVitals from './reportWebVitals';
 
+
+window.emitEvent=(eventName, detail)=> {
+    const event = new CustomEvent(eventName, { detail });
+    document.dispatchEvent(event);
+}
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   
     <App />
   
 );
-console.log(window.versions.chrome())
+
+
+
+
 
 
 // If you want to start measuring performance in your app, pass a function
