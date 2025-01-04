@@ -1,10 +1,12 @@
 import React from "react";
 const MusicRow=(props)=>{
 
+    const getMusic=()=> emitEvent('audio_change', { message: props.data });  
+
     return(
-            <>
+            < >
                     
-                    <div className={(props.pair)?"grid grid-cols-7 items-center px-4 py-2 hover:bg-blue-50 transition bg-gray-200":"grid grid-cols-7 items-center px-4 py-2 hover:bg-blue-50 transition "}  >
+                    <div onClick={getMusic} className={(props.pair)?"grid grid-cols-7 items-center px-4 py-2 hover:bg-blue-50 transition bg-gray-200":"grid grid-cols-7 items-center px-4 py-2 hover:bg-blue-50 transition "}  style={{cursor:'pointer'}}>
                     {/* <!-- Checkbox --> */}
                     {/* <div className="col-span-1 flex items-center">
                     <input type="checkbox" className="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded"/>

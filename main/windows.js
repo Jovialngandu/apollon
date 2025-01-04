@@ -7,12 +7,14 @@ function createWindow(){
       width: 1500,
       height: 1000,
       autoHideMenuBar:true,
-      contextIsolation:true,
+      contextIsolation:false,
+    
       enableRemoteModule:false,
       nodeIntegration:false,//desactivation de l'acces direct à node dans le renderer
       webPreferences: 
       {
-        preload: path.join(__dirname, '../preload/index.js')
+        preload: path.join(__dirname, '../preload/index.js'),
+        webSecurity:false,
       },
      
       frame:false ,

@@ -2,15 +2,20 @@ import React from 'react';
 import Sidebar from './components/sidebar';
 import Header from './components/header';
 import Frame from './components/frame';
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Albums from './components/myMusicPages/albums' 
 import Artists from './components/myMusicPages/artists';
 import Singles from './components/myMusicPages/singles';
 import Player from './components/player';
 import AdderpathModal from './components/modal';
+import Audio_play from './components/audio';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 function App() {
+  
   return (
     <>
+
+       <Audio_play/>
       <div className="flex flex-col h-screen App z-20">
          {/* <!-- Section principale en haut  */}
         <div className="flex flex-1 "style={{overflow:"hidden"}}>
