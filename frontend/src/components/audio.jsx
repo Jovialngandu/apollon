@@ -13,12 +13,14 @@ const Audio_play = (props) => {
 
   // Combined event listener for audio_change and audio_pause
   const handleAudioEvent = async (event) => {
+   
       if (event.type === 'audio_change') {
         const filePath = 'file:///' + event.detail.message.file_path.replace(/\\/g, '/');
         setSource([filePath]);
         props.audio.setAudio((current)=>{
           return {...current,
                   duration:event.detail.message.duration,
+                  volume:audioRef.current.volume,
                   isPlay:true
                 
                 }
@@ -30,6 +32,7 @@ const Audio_play = (props) => {
             props.audio.setAudio((current)=>{
               return {...current,
                       duration:audioRef.current.duration,
+                      volume:audioRef.current.volume,
                       isPlay:true
                     
                     }
@@ -39,6 +42,7 @@ const Audio_play = (props) => {
             props.audio.setAudio((current)=>{
               return {...current,
                       duration:audioRef.current.duration,
+                      volume:audioRef.current.volume,
                       isPlay:false
                     
                     }
@@ -50,12 +54,15 @@ const Audio_play = (props) => {
     }else if(event.type === 'change_time'){
        audioRef.current.currentTime = event.detail.message.time
 
-    };
+    }else if(event.type ==='change_volume'){
+      audioRef.current.volume = event.detail.message.volume/100
+    }
   }
   useEffect(() => {
     document.addEventListener('audio_change', handleAudioEvent);
     document.addEventListener('audio_pause', handleAudioEvent);
     document.addEventListener('change_time',handleAudioEvent)
+    document.addEventListener('change_volume',handleAudioEvent)
 
     return () => {
       document.removeEventListener('audio_change', handleAudioEvent);
@@ -72,7 +79,7 @@ const Audio_play = (props) => {
       } else {
         audioRef.current.currentTime = 0; // Reset playback time when paused
       }
-      audioRef.current.volume = 1;
+      audioRef.current.volume = 0.5;
     }
   }, [source, isPlaying]);
 
