@@ -3,7 +3,7 @@ import React, { useState, useRef,useEffect } from "react";
 const Audio_play = (props) => {
  
   
-  const [source, setSource] = useState(["C:/Users/DELL/music/tets/Pray for Me (sped up+reverb) tiktok version_128.mp3"]);
+  const [source, setSource] = useState(["C:/Users/DELL/music/Telegram/Another Love - Tom Odell.mp3"]);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -16,28 +16,51 @@ const Audio_play = (props) => {
       if (event.type === 'audio_change') {
         const filePath = 'file:///' + event.detail.message.file_path.replace(/\\/g, '/');
         setSource([filePath]);
-        props.audio.setAudio(true)
+        props.audio.setAudio((current)=>{
+          return {...current,
+                  duration:event.detail.message.duration,
+                  isPlay:true
+                
+                }
+        })
         handlePlayPause(); // Play or pause based on current state
       } else if (event.type === 'audio_pause') {
           if(audioRef.current.paused) {
             audioRef.current.play()
-            props.audio.setAudio(true)
+            props.audio.setAudio((current)=>{
+              return {...current,
+                      duration:audioRef.current.duration,
+                      isPlay:true
+                    
+                    }
+            })
           }else{
             audioRef.current.pause();
-            props.audio.setAudio(false)
+            props.audio.setAudio((current)=>{
+              return {...current,
+                      duration:audioRef.current.duration,
+                      isPlay:false
+                    
+                    }
+            })
 
           }
         
       
+    }else if(event.type === 'change_time'){
+       audioRef.current.currentTime = event.detail.message.time
+
     };
   }
   useEffect(() => {
     document.addEventListener('audio_change', handleAudioEvent);
     document.addEventListener('audio_pause', handleAudioEvent);
+    document.addEventListener('change_time',handleAudioEvent)
 
     return () => {
       document.removeEventListener('audio_change', handleAudioEvent);
       document.removeEventListener('audio_pause', handleAudioEvent);
+      document.removeEventListener('change_time', handleAudioEvent);
     };
   }, []);
 
@@ -56,6 +79,36 @@ const Audio_play = (props) => {
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
   };
+  const ended=()=>{
+    props.audio.setAudio((current)=>{
+      return {...current,
+              duration:audioRef.current.duration,
+              isPlay:false
+            
+            }
+    })
+  }
+
+const play=()=>setInterval(() => {
+
+    if(props.audio.audio){
+        props.audio.setAudio((current)=>{
+          return {...current,
+                  duration:audioRef.current.duration,
+                  duration_played:audioRef.current.currentTime,
+                 
+                }
+        })
+
+    }
+  
+}, 1000);
+
+
+const pause=()=>{
+    clearInterval(play())
+}
+
 
   return (
     <div className="hidden">
@@ -64,6 +117,10 @@ const Audio_play = (props) => {
         id="player_audio"
         controls
         src={source[0]}
+        onPlay={play}
+        onPause={pause}
+        onEnded={ended}
+        
       />
     </div>
   );

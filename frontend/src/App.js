@@ -11,7 +11,7 @@ import Audio_play from './components/audio';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
-  const [audio,setAudio]=useState(false)
+  const [audio,setAudio]=useState({isplay:false})
   
   return (
     <>

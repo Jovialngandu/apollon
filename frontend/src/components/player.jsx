@@ -1,16 +1,24 @@
-import  React, { useState } from 'react'
+import  React, { useRef, useState } from 'react'
 
 const Player=(props)=>{
 //    const [btnPause,setBtnPause]=useState(props.audio.audio)
 
+    const counter=useRef(null)
+    
+    const getValue=(element)=>{
+       counter.current.value= element.target.value
+       emitEvent('change_time', { message: {time:element.target.value} });
+    }
 
     const paused_play=()=>{
 
         emitEvent('audio_pause', { message: 'Hello from MyComponent!' });
     }
-    
+    // console.log(props)
+
     return(
         <>
+
 
         <div className=" fixed bottom-0 left-0 z-50 grid w-full h-24 grid-cols-1 px-8 bg-gray-800 border-t border-gray-200 md:grid-cols-3 dark:bg-gray-700 dark:border-gray-600">
     <div className="items-center justify-center hidden me-auto md:flex">
@@ -43,7 +51,7 @@ const Player=(props)=>{
                 <button  onClick={paused_play}data-tooltip-target="tooltip-pause" type="button" className="inline-flex items-center justify-center p-2.5 mx-2 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800">
                     
                     {
-                        (props.audio.audio)?
+                        (props.audio.audio.isPlay)?
                         
                         (<svg className="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 10 16">
                             <path fillRule="evenodd" d="M0 .8C0 .358.32 0 .714 0h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 0 15.2V.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H7.857c-.394 0-.714-.358-.714-.8V.8Z" clipRule="evenodd"/>
@@ -53,14 +61,6 @@ const Player=(props)=>{
                             <path fillRule="evenodd" d="M8.6 5.2A1 1 0 0 0 7 6v12a1 1 0 0 0 1.6.8l8-6a1 1 0 0 0 0-1.6l-8-6Z" clipRule="evenodd"/>
                             </svg>)
                     }
-                          
-                    
-                   
-                    
-                    
-                    
-                    
-
 
                     <span className="sr-only">Pause video</span>
                 </button>
@@ -90,11 +90,18 @@ const Player=(props)=>{
                 </div>
             </div>
             <div className="flex items-center justify-between space-x-2 rtl:space-x-reverse">
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">3:45</span>
-                <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-800">
-                    <div className="bg-blue-600 h-1.5 rounded-full" style={{width: '5%'}}></div>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+                {(props.audio.audio.duration_played)?Math.floor(props.audio.audio.duration_played/60)+':'+(Math.floor(((props.audio.audio.duration_played/60)%1)*60)):'00:00'} 
+                </span>
+                <div className="w-full rounded-full  dark:bg-gray-800 pointer"  style={{cursor:'pointer'}}>
+                    <input type="range" max={props.audio.audio.duration}   value={(props.audio.audio.duration_played)?props.audio.audio.duration_played:'0'} className="bg-blue-600 h-1.5 rounded-full w-full" ref={counter} onMouseDown={getValue} onChange={getValue}/>
+                     <div className="bg-blue-600 h-1.5 rounded-full hidden" style={{width: '5%'}}></div> 
                 </div>
-                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">5:00</span>
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+
+
+                {(props.audio.audio.duration)?Math.floor(props.audio.audio.duration/60)+':'+(Math.floor(((props.audio.audio.duration/60)%1)*60)):'00:00'} 
+                </span>
             </div>
         </div>
     </div>
