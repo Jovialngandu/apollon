@@ -1,10 +1,22 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Filter from "../filter";
 import Openadder from "../openadder";
 import TableMusic from "../tableMusic";
 
-const Singles=()=>{
+    const Singles=()=>{
+    const [musics,setMusics]=useState({result:[]})
+    const loadMusic= async()=>{
 
+         const songs=await window.api.invoke('Music:findAll')
+         setMusics(songs)
+         
+        
+    };
+
+    useEffect(() => {
+        loadMusic()
+      }, []);
+        
     return(
         <>
         
@@ -12,7 +24,7 @@ const Singles=()=>{
            context={
                 {
                     name:'singles',
-                    number:12,
+                    number:musics.result.length,
                     filter_by:{
                         date:'Date d\'ajout ',
                         alphabet:'A à Z',
@@ -28,7 +40,7 @@ const Singles=()=>{
              <Openadder/>
              <div className="h-screen">
                 <div className="h-full">
-                        <TableMusic/>
+                        <TableMusic musics={musics.result}/>
                 </div>
              
                 
