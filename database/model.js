@@ -11,6 +11,7 @@ class Model {
     
     async createTable() {
        
+        console.log('azertyu')
         const columns = Object.entries(this.schema)//transforme l'objet en tableau avec chaque entré comme tableau de 2 element (le nom de l'attribut et ses contraintes)
           .map(([name, type]) => `${name} ${type}`)//ceci va retourner un tableau qui va concatener le nom de l'attribut et ses contrainte ou type
           .join(', ');
@@ -46,6 +47,7 @@ class Model {
     }
     
     async findAll() {
+        console.log("AZERTY")
         const query = `SELECT * FROM ${this.tableName}`;
         const datas= await runQuery(query,[],{method:'all'});    
         return datas

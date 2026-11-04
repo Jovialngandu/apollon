@@ -14,7 +14,7 @@ async function getConfig()  {
       
           }else{
              await createConfig()
-          }
+          }datas
 
           do {
              settings =await setting.findLast();
